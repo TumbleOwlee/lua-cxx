@@ -1,0 +1,62 @@
+---
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: Latest
+
+# Indentation — rustfmt uses 4 spaces
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+
+# access specifiers flush with the class opening brace
+AccessModifierOffset: -4
+
+# rustfmt default line width
+ColumnLimit: 100
+
+# opening braces stay on the same line
+BreakBeforeBraces: Attach
+
+# constructor initializer list: colon on new line, pack as many per line as fit
+BreakConstructorInitializers: BeforeColon
+PackConstructorInitializers: BinPack
+
+# pointer/reference declarator attaches to the type, not the name: T *ptr
+PointerAlignment: Right
+ReferenceAlignment: Right
+
+# when arguments wrap, each goes on its own indented line (no column alignment)
+AlignAfterOpenBracket: AlwaysBreak
+BinPackArguments: false
+BinPackParameters: false
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+
+# allow trivial single-expression functions on one line inside a class body
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLambdasOnASingleLine: All
+AllowShortBlocksOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# case labels at the same indent as the switch body, not extra-indented
+IndentCaseLabels: false
+
+# template<...> always on its own line before the declaration
+AlwaysBreakTemplateDeclarations: Yes
+SpaceAfterTemplateKeyword: true
+
+# no spaces inside angle brackets: std::vector<int>, not std::vector< int >
+SpacesInAngles: Never
+
+# space before ( only for control-flow keywords (if, for, while), not functions
+SpaceBeforeParens: ControlStatements
+
+# no space before braced init-lists: T{}
+SpaceBeforeCpp11BracedList: false
+Cpp11BracedListStyle: true
+
+# preserve the existing include order
+SortIncludes: false

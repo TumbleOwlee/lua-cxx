@@ -23,22 +23,17 @@ message("Build type: ${CMAKE_BUILD_TYPE}")
 # Create list of all source files
 file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*" )
 
-# Get Lua
-find_package(Lua REQUIRED)
-
-# Import lobrary if not already done
-if(Lua_FOUND AND NOT TARGET Lua::Lua)
-  add_library(Lua::Lua INTERFACE IMPORTED)
-  set_target_properties(
-    Lua::Lua
-    PROPERTIES
-      INTERFACE_INCLUDE_DIRECTORIES "${LUA_INCLUDE_DIR}"
-      INTERFACE_LINK_LIBRARIES "${LUA_LIBRARIES}"
-  )
-endif()
+# Add luau
+set(LUAU_BUILD_CLI OFF)
+set(LUAU_BUILD_TESTS OFF)
+set(LUAU_EXTERN_C ON)
+set(LUAU_BUILD_SHARED OFF)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/luau)
 
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Link lua
-target_link_libraries(${PROJECT_NAME} Lua::Lua)
+target_link_libraries(${PROJECT_NAME} Luau.VM Luau.Compiler)
